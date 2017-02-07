@@ -78,6 +78,12 @@ h = sigmoid(Theta2*a2);
 % Cost calculation
 J = (1 / m)* sum(sum(-Y.*log(h) - (1 - Y).*log(1-h)));
 
+% Regularization
+R = (lambda / (2*m)) * (sum(sum(Theta1(:,2:end).^2,2)) + sum(sum(Theta2(:,2:end).^2,2)));
+
+% Cost calculation with Regularization 
+J = J + R;
+
 
 
 
