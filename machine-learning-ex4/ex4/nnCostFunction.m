@@ -89,9 +89,10 @@ J = J + R;
 % Backpropagation algorithm
 delta_3 = (h - Y);
 delta_2 = (Theta2(:,2:end)' * delta_3) .* sigmoidGradient(z2);
-Theta2_grad = 1/m * (delta_3 * a2');
-Theta1_grad = 1/m * (delta_2 * X);
-
+Theta2_grad = 1/m * (delta_3 * a2') + (lambda/m)*Theta2;
+Theta1_grad = 1/m * (delta_2 * X) + (lambda/m)*Theta1;
+Theta1_grad(:,1) = Theta1_grad(:,1) - (lambda/m)*Theta1(:,1);
+Theta2_grad(:,1) = Theta2_grad(:,1) - (lambda/m)*Theta2(:,1);
 
 
 
