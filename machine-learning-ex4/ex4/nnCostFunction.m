@@ -71,9 +71,11 @@ end
 
 % Forward propagation calculation
 X = [ones(m,1) X];
-a2 = sigmoid(Theta1*X');
+z2 = Theta1*X';
+a2 = sigmoid(z2);
 a2 = [ones(1, m);a2];
-h = sigmoid(Theta2*a2);
+z3 = Theta2*a2;
+h = sigmoid(z3);
 
 % Cost calculation
 J = (1 / m)* sum(sum(-Y.*log(h) - (1 - Y).*log(1-h)));
@@ -83,6 +85,12 @@ R = (lambda / (2*m)) * (sum(sum(Theta1(:,2:end).^2,2)) + sum(sum(Theta2(:,2:end)
 
 % Cost calculation with Regularization 
 J = J + R;
+
+% Backpropagation algorithm
+delta_3 = (h - Y);
+delta_2 = (Theta2(:,2:end)' * delta_3) .* sigmoidGradient(z2);
+Theta2_grad = 1/m * (delta_3 * a2');
+Theta1_grad = 1/m * (delta_2 * X);
 
 
 
