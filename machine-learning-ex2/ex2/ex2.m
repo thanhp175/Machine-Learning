@@ -11,6 +11,7 @@
 %     costFunction.m
 %     predict.m
 %     costFunctionReg.m
+%	  plotData.m
 %
 %  For this exercise, you will not need to change any code in this file,
 %  or any other files other than those mentioned above.
