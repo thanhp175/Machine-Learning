@@ -62,6 +62,21 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+% Forming matrix Y, each column of Y correspond to 1 expected output of
+% the neural network for each training input
+Y = zeros(num_labels, m);
+for i = 1:m
+    Y(y(i), i) = 1;
+end
+
+% Forward propagation calculation
+X = [ones(m,1) X];
+a2 = sigmoid(Theta1*X');
+a2 = [ones(1, m);a2];
+h = sigmoid(Theta2*a2);
+
+% Cost calculation
+J = (1 / m)* sum(sum(-Y.*log(h) - (1 - Y).*log(1-h)));
 
 
 
