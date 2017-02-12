@@ -204,8 +204,9 @@ pause;
 [lambda_vec, error_train, error_val] = ...
     validationCurve(X_poly, y, X_poly_val, yval);
 
-close all;
+figure(3);
 plot(lambda_vec, error_train, lambda_vec, error_val);
+title(sprintf('Polynomial Regression Validation Curve'));
 legend('Train', 'Cross Validation');
 xlabel('lambda');
 ylabel('Error');
@@ -218,3 +219,21 @@ end
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
+
+%% =========== Part 9: Compute test set error =============
+%
+[eror_val_min,eror_val_min_idx] = min(error_val);
+theta = trainLinearReg(X_poly_test, ytest, lambda_vec(eror_val_min_idx));
+[J, grad] = linearRegCostFunction(X_poly_test, ytest, theta, 0);
+fprintf('Test Error\tValidation Error\n');
+fprintf('%f\t%f\n',J,eror_val_min);
+% Plot training data and fit
+figure(4);
+plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
+plotFit(min(X), max(X), mu, sigma, theta, p);
+xlabel('Change in water level (x)');
+ylabel('Water flowing out of the dam (y)');
+title (sprintf('Polynomial Regression Fit (lambda = %f)', lambda_vec(eror_val_min_idx)));
+
+
+
