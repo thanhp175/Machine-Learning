@@ -109,13 +109,13 @@ lambda = 0;
     learningCurve([ones(m, 1) X], y, ...
                   [ones(size(Xval, 1), 1) Xval], yval, ...
                   lambda);
-
+figure(2)
 plot(1:m, error_train, 1:m, error_val);
 title('Learning curve for linear regression')
 legend('Train', 'Cross Validation')
 xlabel('Number of training examples')
 ylabel('Error')
-axis([0 13 0 150])
+axis([0 13 0 max(max(error_train), max(error_val))])
 
 fprintf('# Training Examples\tTrain Error\tCross Validation Error\n');
 for i = 1:m
@@ -175,7 +175,7 @@ xlabel('Change in water level (x)');
 ylabel('Water flowing out of the dam (y)');
 title (sprintf('Polynomial Regression Fit (lambda = %f)', lambda));
 
-figure(2);
+figure(3);
 [error_train, error_val] = ...
     learningCurve(X_poly, y, X_poly_val, yval, lambda);
 plot(1:m, error_train, 1:m, error_val);
@@ -183,7 +183,7 @@ plot(1:m, error_train, 1:m, error_val);
 title(sprintf('Polynomial Regression Learning Curve (lambda = %f)', lambda));
 xlabel('Number of training examples')
 ylabel('Error')
-axis([0 13 0 100])
+axis([0 13 0 max(max(error_train), max(error_val))])
 legend('Train', 'Cross Validation')
 
 fprintf('Polynomial Regression (lambda = %f)\n\n', lambda);
