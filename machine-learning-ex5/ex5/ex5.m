@@ -204,7 +204,7 @@ pause;
 [lambda_vec, error_train, error_val] = ...
     validationCurve(X_poly, y, X_poly_val, yval);
 
-figure(3);
+figure(4);
 plot(lambda_vec, error_train, lambda_vec, error_val);
 title(sprintf('Polynomial Regression Validation Curve'));
 legend('Train', 'Cross Validation');
@@ -228,7 +228,7 @@ theta = trainLinearReg(X_poly_test, ytest, lambda_vec(eror_val_min_idx));
 fprintf('Test Error\tValidation Error\n');
 fprintf('%f\t%f\n',J,eror_val_min);
 % Plot training data and fit
-figure(4);
+figure(5);
 plot(X, y, 'rx', 'MarkerSize', 10, 'LineWidth', 1.5);
 plotFit(min(X), max(X), mu, sigma, theta, p);
 xlabel('Change in water level (x)');
