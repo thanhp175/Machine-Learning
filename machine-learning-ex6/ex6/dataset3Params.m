@@ -23,7 +23,7 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 trials = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
-predict_error = zeros(1, 64);
+predict_error = zeros(1, size(trials, 2)^2);
 i = 1;
 for C = trials
     for sigma = trials
@@ -33,7 +33,7 @@ for C = trials
         i = i + 1;
     end
 end
-error_matrix = reshape(predict_error, [8, 8])';
+error_matrix = reshape(predict_error, [size(trials, 2), size(trials, 2)])';
 [C_idx, sigma_idx] = find(error_matrix == min(min(error_matrix)));
 C = trials(C_idx);
 sigma = trials(sigma_idx);
