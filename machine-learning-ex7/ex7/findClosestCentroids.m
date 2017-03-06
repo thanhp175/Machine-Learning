@@ -20,6 +20,17 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
+for i = 1 : size(X,1)
+    min_distance = norm(X(i, :) - centroids(1,:))^2;
+    idx(i) = 1;
+    for j = 2 : K
+        temp_min_distance = norm(X(i, :) - centroids(j,:))^2;
+        if temp_min_distance <= min_distance
+            min_distance = temp_min_distance;
+            idx(i) = j;
+        end
+    end
+end
 
 
 
