@@ -40,7 +40,8 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 pred_rating_matrix = X*Theta';
-J = (1/2) * sum(sum((pred_rating_matrix(R==1) - Y(R==1)).^2));
+J = (1/2) * sum(sum((pred_rating_matrix(R==1) - Y(R==1)).^2)) + lambda/2 * sum(sum(Theta.^2)) + lambda/2 * sum(sum(X.^2));
+
 for i = 1:num_movies
     idx = find(R(i, :)==1);
     X_grad(i,:) = (pred_rating_matrix(i,idx) - Y(i,idx)) * Theta(idx,:);
