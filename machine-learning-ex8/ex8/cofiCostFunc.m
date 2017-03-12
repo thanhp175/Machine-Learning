@@ -41,6 +41,15 @@ Theta_grad = zeros(size(Theta));
 %
 pred_rating_matrix = X*Theta';
 J = (1/2) * sum(sum((pred_rating_matrix(R==1) - Y(R==1)).^2));
+for i = 1:num_movies
+    idx = find(R(i, :)==1);
+    X_grad(i,:) = (pred_rating_matrix(i,idx) - Y(i,idx)) * Theta(idx,:);
+end
+
+for j = 1:num_users
+    idx = find(R(:,j)==1);
+    Theta_grad(j,:) = (pred_rating_matrix(idx,j) - Y(idx,j))' * X(idx,:);
+end
 
 
 
