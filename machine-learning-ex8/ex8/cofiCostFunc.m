@@ -44,12 +44,12 @@ J = (1/2) * sum(sum((pred_rating_matrix(R==1) - Y(R==1)).^2)) + lambda/2 * sum(s
 
 for i = 1:num_movies
     idx = find(R(i, :)==1);
-    X_grad(i,:) = (pred_rating_matrix(i,idx) - Y(i,idx)) * Theta(idx,:);
+    X_grad(i,:) = (pred_rating_matrix(i,idx) - Y(i,idx)) * Theta(idx,:) + lambda * X(i,:);
 end
 
 for j = 1:num_users
     idx = find(R(:,j)==1);
-    Theta_grad(j,:) = (pred_rating_matrix(idx,j) - Y(idx,j))' * X(idx,:);
+    Theta_grad(j,:) = (pred_rating_matrix(idx,j) - Y(idx,j))' * X(idx,:) + lambda * Theta(j,:);
 end
 
 
